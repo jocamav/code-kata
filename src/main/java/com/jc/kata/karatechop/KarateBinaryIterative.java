@@ -1,24 +1,10 @@
 package com.jc.kata.karatechop;
 
-public class KarateBinaryIterative implements Karate {
+public class KarateBinaryIterative extends AbstractKarateBinary {
 
-	public int chop(int value, int[] array) {
-		int lowIndex = 0;
-		int highIndex = array.length -1;
-		int index;
-		while(lowIndex <= highIndex) {
-			index = (highIndex +lowIndex)/2;
-			if(array[index] == value) {
-				return index;
-			}
-			else if(array[index] > value) {
-				highIndex = index - 1;
-			}
-			else {
-				lowIndex = index +1;
-			}
-		}
-		return -1;
+	@Override
+	protected int getIndex(int lowIndex, int highIndex, int value) {
+		return (highIndex +lowIndex)/2;
 	}
 
 }
