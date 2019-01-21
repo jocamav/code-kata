@@ -7,7 +7,7 @@ public abstract class AbstractKarateBinary implements Karate {
 		int highIndex = array.length -1;
 		int index;
 		while(lowIndex <= highIndex) {
-			index = getIndex(lowIndex, highIndex, value);
+			index = getIndex(lowIndex, highIndex, value, array);
 			if(array[index] == value) {
 				return index;
 			}
@@ -21,6 +21,6 @@ public abstract class AbstractKarateBinary implements Karate {
 		return -1;
 	}
 	
-	protected abstract int getIndex(int lowIndex, int highIndex, int value);
+	protected abstract int getIndex(int lowIndex, int highIndex, int value, int[] array);
 
 }
