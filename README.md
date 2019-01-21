@@ -11,4 +11,4 @@ To execute the solution
 ```
 mvn clean
 mvn '-Dtest=com.jc.kata.karatechop.*Test' test
-``
+```
