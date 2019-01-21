@@ -2,10 +2,11 @@ package com.jc.kata.karatechop;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class KarateChopTest {
+public abstract class AbstractKarateTest {
 
 	private static int[] EMPTY_ARRAY;
 	private static int[] ONE_ITEM_ARRAY;
@@ -13,6 +14,8 @@ public class KarateChopTest {
 	private static int[] FOUR_ITEM_ARRAY;
 	private static int[] HUNDRED_ITEM_ARRAY;
 	private static int[] THOUSAND_ITEM_ARRAY;
+	
+	protected Karate karate;
 	
 	@BeforeClass
 	public static void initArrays() {
@@ -31,42 +34,55 @@ public class KarateChopTest {
 		}
 		return array;
 	}
+	
+	@Test
+	public void testWithEmptyArray() {
+		assertEquals("Check value", -1, karate.chop(3,EMPTY_ARRAY));
+	}
 
 	@Test
-	public void testKarateIterative() {
-		Karate karate = new KarateIterative();
-		testChopWithArrays(karate);
+	public void testNotFoundWithOneItemArray() {
+		assertEquals("Check value", -1, karate.chop(3,ONE_ITEM_ARRAY));
+	}
+
+	@Test
+	public void testWithOneItemArray() {
+		assertEquals("Check value", 0, karate.chop(1,ONE_ITEM_ARRAY));
 	}
 	
 	@Test
-	public void testKarateRecursive() {
-		Karate karate = new KarateRecursive();
-		testChopWithArrays(karate);
-	}
-	
-	public void testChopWithArrays(Karate karate) {
-		assertEquals("Check value", -1, karate.chop(3,EMPTY_ARRAY));
-		assertEquals("Check value", -1, karate.chop(3,ONE_ITEM_ARRAY));
-		assertEquals("Check value", 0, karate.chop(1,ONE_ITEM_ARRAY));
-		
+	public void testWithThreeItemsArray() {
 		assertEquals("Check value", 0, karate.chop(1,THREE_ITEM_ARRAY));
 		assertEquals("Check value", 1, karate.chop(3,THREE_ITEM_ARRAY));
 		assertEquals("Check value", 2, karate.chop(5,THREE_ITEM_ARRAY));
+	}
+
+	@Test
+	public void testNotFoundWithThreeItemsArray() {
 		assertEquals("Check value", -1, karate.chop(0,THREE_ITEM_ARRAY));
 		assertEquals("Check value", -1, karate.chop(2,THREE_ITEM_ARRAY));
 		assertEquals("Check value", -1, karate.chop(4,THREE_ITEM_ARRAY));
 		assertEquals("Check value", -1, karate.chop(6,THREE_ITEM_ARRAY));
-
+	}
+	@Test
+	public void testWithFourItemsArray() {
 		assertEquals("Check value", 0, karate.chop(1,FOUR_ITEM_ARRAY));
 		assertEquals("Check value", 1, karate.chop(3,FOUR_ITEM_ARRAY));
 		assertEquals("Check value", 2, karate.chop(5,FOUR_ITEM_ARRAY));
 		assertEquals("Check value", 3, karate.chop(7,FOUR_ITEM_ARRAY));
+	}
+	
+	@Test
+	public void testNotFoundWithFourItemsArray() {
 		assertEquals("Check value", -1, karate.chop(0,FOUR_ITEM_ARRAY));
 		assertEquals("Check value", -1, karate.chop(2,FOUR_ITEM_ARRAY));
 		assertEquals("Check value", -1, karate.chop(4,FOUR_ITEM_ARRAY));
 		assertEquals("Check value", -1, karate.chop(6,FOUR_ITEM_ARRAY));
 		assertEquals("Check value", -1, karate.chop(8,FOUR_ITEM_ARRAY));
+	}
 
+	@Test
+	public void testWithHundredItemsArray() {
 		assertEquals("Check value", 0, karate.chop(1,HUNDRED_ITEM_ARRAY));
 		assertEquals("Check value", 1, karate.chop(3,HUNDRED_ITEM_ARRAY));
 		assertEquals("Check value", 4, karate.chop(9,HUNDRED_ITEM_ARRAY));
@@ -82,12 +98,19 @@ public class KarateChopTest {
 		assertEquals("Check value", 91, karate.chop(183,HUNDRED_ITEM_ARRAY));
 		assertEquals("Check value", 95, karate.chop(191,HUNDRED_ITEM_ARRAY));
 		assertEquals("Check value", 99, karate.chop(199,HUNDRED_ITEM_ARRAY));
+	}
+
+	@Test
+	public void testNotFoundWithHundredItemsArray() {
 		assertEquals("Check value", -1, karate.chop(0,HUNDRED_ITEM_ARRAY));
 		assertEquals("Check value", -1, karate.chop(20,HUNDRED_ITEM_ARRAY));
 		assertEquals("Check value", -1, karate.chop(40,HUNDRED_ITEM_ARRAY));
 		assertEquals("Check value", -1, karate.chop(60,HUNDRED_ITEM_ARRAY));
 		assertEquals("Check value", -1, karate.chop(100,HUNDRED_ITEM_ARRAY));
-		
+	}
+	
+	@Test
+	public void testWithThousandItemsArray() {
 		assertEquals("Check value", 0, karate.chop(1,THOUSAND_ITEM_ARRAY));
 		assertEquals("Check value", 1, karate.chop(3,THOUSAND_ITEM_ARRAY));
 		assertEquals("Check value", 4, karate.chop(9,THOUSAND_ITEM_ARRAY));
@@ -112,10 +135,13 @@ public class KarateChopTest {
 		assertEquals("Check value", 750, karate.chop(1501,THOUSAND_ITEM_ARRAY));
 		assertEquals("Check value", 950, karate.chop(1901,THOUSAND_ITEM_ARRAY));
 		assertEquals("Check value", 999, karate.chop(1999,THOUSAND_ITEM_ARRAY));
+	}
+
+	@Test
+	public void testNotFoundWithThousandItemsArray() {
 		assertEquals("Check value", -1, karate.chop(2,THOUSAND_ITEM_ARRAY));
 		assertEquals("Check value", -1, karate.chop(100,THOUSAND_ITEM_ARRAY));
 		assertEquals("Check value", -1, karate.chop(1000,THOUSAND_ITEM_ARRAY));
 		assertEquals("Check value", -1, karate.chop(2000,THOUSAND_ITEM_ARRAY));
 	}
-
 }
